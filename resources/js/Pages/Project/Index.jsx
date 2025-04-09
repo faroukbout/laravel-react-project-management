@@ -2,7 +2,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { Head } from '@inertiajs/react'
 import React from 'react'
 
-export default function Index({auth,projecs}) {
+export default function Index({auth,projects}) {
+    console.log(projects);
+    
   return (
     <AuthenticatedLayout
     header={
@@ -17,6 +19,9 @@ export default function Index({auth,projecs}) {
                 <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div className="p-6 text-gray-900">
                         Projects
+                        <pre>{JSON.stringify(projects,undefined,2)}
+
+                        </pre>
                     </div>
                 </div>
             </div>

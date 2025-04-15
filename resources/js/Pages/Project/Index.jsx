@@ -5,7 +5,8 @@ import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from '@/Constants'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { Head, Link, router } from '@inertiajs/react'
 import React from 'react'
-
+import { ChevronUpDownIcon } from '@heroicons/react/24/solid'
+import TableHeader from '@/Components/TableHeader'
 export default function Index({auth,projects,queryParams = null}) {
     queryParams = queryParams || {};
     const searchFieldChanged = (name,value) =>{
@@ -22,6 +23,20 @@ export default function Index({auth,projects,queryParams = null}) {
         if(e.key !== "Enter") return;
         searchFieldChanged(name,e.target.value);
     }
+
+    const sortChanged = (name) => {
+        if(name === queryParams.sort_field) {
+            if(queryParams.sort_direction ==="asc"){
+                queryParams.sort_direction = "desc";
+            }else{
+                queryParams.sort_direction = "asc";
+            }
+        }else{
+            queryParams.sort_field = name;
+            queryParams.sort_direction = "asc";
+        }
+        router.get(route("project.index", queryParams));
+    }
   return (
     <AuthenticatedLayout
     header={
@@ -35,17 +50,33 @@ export default function Index({auth,projects,queryParams = null}) {
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div className="p-6 text-gray-900">
-                        
-                        <table className='w-full text-sm text-left rtl:text-right '>
+                        <div className="overflow-auto">
+                            <table className='w-full text-sm text-left rtl:text-right '>
                         
                             <thead className='text-xs  uppercase bg-gray-100  border-b-2'>
                                 <tr className='text-nowrap'>
                                     <th className='px-3 py-3 text-gray-700'>Id</th>
                                     <th className='px-3 py-3 text-gray-700'>Image</th>
-                                    <th className='px-3 py-3 text-gray-700'>Name</th>
-                                    <th className='px-3 py-3 text-gray-700'>Status</th>
-                                    <th className='px-3 py-3 text-gray-700'>Created</th>
-                                    <th className='px-3 py-3 text-gray-700'>Due Date</th>
+                                    <TableHeader 
+                                        name="name"
+                                        sort_field={queryParams.sort_field}
+                                        sort_direction={queryParams.sort_direction}
+                                        sortChanged={sortChanged}>Name</TableHeader>
+                                    <TableHeader
+                                        name="status"
+                                        sort_field={queryParams.sort_field}
+                                        sort_direction={queryParams.sort_direction}
+                                        sortChanged={sortChanged}>Status</TableHeader>
+                                    <TableHeader
+                                        name="created_at"
+                                        sort_field={queryParams.sort_field}
+                                        sort_direction={queryParams.sort_direction}
+                                        sortChanged={sortChanged}>Created</TableHeader>
+                                    <TableHeader 
+                                        name="due_date"
+                                        sort_field={queryParams.sort_field}
+                                        sort_direction={queryParams.sort_direction}
+                                        sortChanged={sortChanged}>Due Date</TableHeader>
                                     <th className='px-3 py-3 text-gray-700'>Created By</th>
                                     <th className='px-3 py-3 text-gray-700 text-center'>Actions</th>
                                 </tr>
@@ -106,7 +137,9 @@ export default function Index({auth,projects,queryParams = null}) {
                                     </tr>
                                 ))}                               
                             </tbody>
-                        </table>   
+                        </table> 
+                        </div>
+                          
                         <Pagination links={projects.meta.links}></Pagination>
                     </div>
                 </div>

@@ -7,6 +7,8 @@ import { Head, Link, router } from '@inertiajs/react'
 import React from 'react'
 import { ChevronUpDownIcon } from '@heroicons/react/24/solid'
 import TableHeader from '@/Components/TableHeader'
+
+
 export default function Index({auth,projects,queryParams = null}) {
     queryParams = queryParams || {};
     const searchFieldChanged = (name,value) =>{
@@ -118,7 +120,8 @@ export default function Index({auth,projects,queryParams = null}) {
                                     <tr className='hover:bg-gray-50 transition ' key={project.id}>
                                         <td className='px-3 py-3 text-gray-800'>{project.id}</td> 
                                         <td className='px-3 py-3 text-gray-800'><img src={project.id} /></td>
-                                        <td className='px-3 py-3 text-gray-800'>{project.name}</td>
+                                        <th className='px-3 py-3 text-gray-900 text-nowrap hover:underline'>
+                                            <Link href={route("project.show", project.id)}>{project.name}</Link></th>
                                         <td className='px-3 py-3 text-gray-800'>
                                         <span
                                             className={

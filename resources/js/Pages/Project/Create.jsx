@@ -4,7 +4,7 @@ import SelectInput from "@/Components/SelectInput";
 import TextAreaInput from "@/Components/TextAreaInput";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 
 
 export default function Create({auth}) {
@@ -20,7 +20,7 @@ export default function Create({auth}) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        post(route("project.create"));
+        post(route("project.store"));
     };
   return (
     <AuthenticatedLayout
@@ -82,11 +82,20 @@ export default function Create({auth}) {
                             >
                                 <option value="">Select Status</option>
                                 <option value="pending">Pending</option>
-                                <option value="in_pregress">In Progress</option>
+                                <option value="in_progress">In Progress</option>
                                 <option value="completed">Completed</option>
 
                             </SelectInput>
-                            <InputError message={errors.name} className="mt-2"/>
+                            <InputError message={errors.status} className="mt-2"/>
+                        </div>
+                        <div className="mt-4 text-right">
+                        <Link 
+                            href={route("project.index")}
+                            className="inline-flex items-center justify-center bg-red-500 py-1 px-3 text-gray-200 rounded shadow 
+                            transition-all hover:bg-red-900 mr-2"
+                            >Cancel</Link>
+                        <button className="inline-flex items-center justify-center bg-emerald-500 py-1 px-3 text-white rounded shadow 
+                        transition-all hover:bg-emerald-600">Create</button>
                         </div>
                     </form>
                 

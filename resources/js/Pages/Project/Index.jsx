@@ -9,7 +9,7 @@ import { ChevronUpDownIcon } from '@heroicons/react/24/solid'
 import TableHeader from '@/Components/TableHeader'
 
 
-export default function Index({auth,projects,queryParams = null}) {
+export default function Index({auth,projects,queryParams = null, success}) {
     queryParams = queryParams || {};
     const searchFieldChanged = (name,value) =>{
         if(value){
@@ -46,12 +46,12 @@ export default function Index({auth,projects,queryParams = null}) {
         <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     Projects
         </h2>
-        <Link href={route("project.create")} className="bg-green-700 py-1 px-3 text-white rounded shadow transition-all hover:bg-green-900">New Project</Link>
+        <Link href={route("project.create")} className="bg-emerald-700 py-1 px-3 text-white rounded shadow transition-all hover:bg-green-900">New Project</Link>
         </div>
         
     }>
         <Head title="Projects" />
-
+        {success && (<div className='bg-emerald-700 py-2 px-4 text-white rounded text-center'> {success}</div>)}
         <div className="py-12">
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">

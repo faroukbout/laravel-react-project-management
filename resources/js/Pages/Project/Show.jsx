@@ -20,9 +20,13 @@ export default function Show({auth,project,tasks,queryParams}) {
          <div className="pt-12 ">
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div>
+                            <img src={project.image_path} alt="fg" className="w-full object-cover h-52" />
+                          </div>
                     <div className="p-6 text-gray-900">
                       <div className="grid gap-1 grid-cols-2">
                         <div>
+                  
                           <div>
                             <label className="font-bold text-lg">Project Id </label>
                             <p className="mt-1 text-cyan-950">{project.id}</p>

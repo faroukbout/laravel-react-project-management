@@ -123,7 +123,7 @@ export default function Index({auth,projects,queryParams = null, success}) {
                                 {projects.data.map((project) => (
                                     <tr className='hover:bg-gray-50 transition ' key={project.id}>
                                         <td className='px-3 py-3 text-gray-800'>{project.id}</td> 
-                                        <td className='px-3 py-3 text-gray-800'><img src={project.id} /></td>
+                                        <td className='px-3 py-3 text-gray-800'><img src={project.image_path} style={{ width: 50 }}/></td>
                                         <th className='px-3 py-3 text-gray-900 text-nowrap hover:underline'>
                                             <Link href={route("project.show", project.id)}>{project.name}</Link></th>
                                         <td className='px-3 py-3 text-gray-800'>

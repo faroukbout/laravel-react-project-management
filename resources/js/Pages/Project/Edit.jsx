@@ -61,14 +61,14 @@ export default function Edit({auth,project}) {
                             <TextAreaInput
                                 id="project_description" name="description" value={data.description}
                                 className="mt-1 block w-full"
-                                onChange={e => setData("description" , e.target.value)}
+                                onChange={e => setData("description" , e.target.value)} 
                             />
                             <InputError message={errors.description} className="mt-2"/>
                         </div>
                         <div className="mt-4">
                             <InputLabel htmlFor="project_due_date" value="Project Deadline"/>
                             <TextInput 
-                            format="dd-mm-yy"
+                            
                                 id="project_due_date" type="date" name="due_date" value={data.due_date}
                                 className="mt-1 block w-full"                 
                                 onChange={e => setData("due_date" , e.target.value)}

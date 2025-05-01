@@ -10,8 +10,8 @@ import { Head, Link, useForm } from "@inertiajs/react";
 export default function Edit({auth,user}) {
 
     const {data, setData, post, errors, reset} = useForm({
-        name:user.name || "",
-        email: user.email || "",
+        name:user.data.name || "",
+        email: user.data.email || "",
         password: "",
         password_confirmation:"",
         _method: "PUT",
@@ -20,18 +20,17 @@ export default function Edit({auth,user}) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        post(route("user.update",user.id));
+        post(route("user.update",user.data.id));
     };
   return (
     <AuthenticatedLayout
     header={
       
         <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                Update User "{user.name}"
+                Update User "{user.data.name}"
         </h2>
     }>
     <Head title="New Projcet" />
-
     <div className="py-12">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
@@ -80,10 +79,9 @@ export default function Edit({auth,user}) {
                                                 transition-all hover:bg-red-900 mr-2"
                                                 >Cancel</Link>
                                             <button className="inline-flex items-center justify-center bg-emerald-500 py-1 px-3 text-white rounded shadow 
-                                            transition-all hover:bg-emerald-600">Create</button>
+                                            transition-all hover:bg-emerald-600">Update</button>
                                             </div>
-                                        </form>
-                
+                                        </form>             
             </div>
         </div>
     </div>

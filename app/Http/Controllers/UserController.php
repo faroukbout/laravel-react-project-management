@@ -108,9 +108,15 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
+        $password = $data['password'] ?? null;
+
+        if ($password) {
+            $data['password'] = Hash::make($password);
+        } else {
+            unset($data['password']);
+        }
         $user->update($data);
-        $data['password'] = Hash::make($data['password']);
-        return to_route("user.index")->with("success","user Updated with succeess");
+        return to_route("user.index")->with("success","user $user->name Updated with succeess");
 
     }
 

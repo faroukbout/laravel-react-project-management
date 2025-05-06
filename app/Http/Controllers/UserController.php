@@ -115,6 +115,7 @@ class UserController extends Controller
         } else {
             unset($data['password']);
         }
+        $data["email_verified_at"] = time();
         $user->update($data);
         return to_route("user.index")->with("success","user $user->name Updated with succeess");
 
